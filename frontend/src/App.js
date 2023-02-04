@@ -9,13 +9,15 @@ import {
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
+import NoteState from './contexts/notes/NoteState';
 // import LoadingBar from 'react-top-loading-bar'
 
 
 const App = ()=> {
   
   return (
-      <div>
+      <>
+      <NoteState>
           <BrowserRouter>   
               <Navbar />
               <Routes>
@@ -23,7 +25,8 @@ const App = ()=> {
                 <Route exact path="/about" element = {<About/>}/>                
               </Routes>
           </BrowserRouter>
-      </div>
+        </NoteState>
+      </>
     )
 }
 
