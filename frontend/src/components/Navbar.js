@@ -1,7 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect} from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+    let location = useLocation();
+    useEffect(()=>{
+        console.log(location) //navbar me jis par bhi click krunga usko track krke location batayega
+        console.log(location.pathname) //ye uska pathname batayega like /, /about, etc..
+    }, [location])
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -13,7 +18,8 @@ const Navbar = () => {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                    {/* <Link className="nav-link active" aria-current="page" to="/">Home</Link> */}
+                    <Link className={`nav-link ${location.pathname==="/"? "active":""}`} aria-current="page" to="/">Home</Link>
                 </li>
                 {/* <li className="nav-item">
                     <Link className="nav-link" to="/mynotes">My Notes</Link>
