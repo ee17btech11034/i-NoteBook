@@ -3,7 +3,7 @@ import Notes from './Notes'
 
 const Home = () => {
   return (
-    <div>
+    <div className='mx-2'>
       <Notes/>
     </div>
   )
