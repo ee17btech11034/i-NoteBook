@@ -8,7 +8,7 @@ const AddNote = () => {
 
   const OnclickSubmit = (e)=>{
     e.preventDefault();  //aisa krne se jab bhi submit hoga page reload nhi hoga. 
-    addnote(note)
+    addnote(note.title, note.description, note.tag)
   }
   const OnChange = (e)=>{
     setNote({...note, [e.target.name]:e.target.value}) // iska matlab hai ki pahle note me jo bhi hai unko lo and then unke name ke anusar unki values ko update kr do.
