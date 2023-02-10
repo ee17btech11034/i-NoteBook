@@ -19,20 +19,6 @@ const NoteState = (props)=>{
       const initialNotes = await response.json()
       setNotes(initialNotes)
     }
-    // //get all notes 
-    // const getallnotes2 = async ()=> {
-    //   const url = `${host}/api/notes/fetchallnotes`
-    //   const response = await fetch(url, {
-    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //     headers: {
-    //       'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-    //       'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNkYmQ2YmYyY2Y5OWZkNThjOGNjYzk1In0sImlhdCI6MTY3NTM5OTMyMX0.qJvZ-L4Sts41w0d2A0BK7J2NkvwmGWrwwdW11eYMmo0'
-    //     },
-    //     body: JSON.stringify(data) // body data type must match "Content-Type" header
-    //   });
-    //   return response.json(); // parses JSON response into native JavaScript objects
-    // }
-
     
     //Add a note 
     const addnote = async (title, description, tag="Public")=>{
@@ -50,19 +36,41 @@ const NoteState = (props)=>{
     }
     
     // Edit a Note 
-    const updatenote = async (note_id)=>{
-      // note_id = '63dce400ec698dcbf7c55811'
-      // const url = `${host}/api/notes/updatenote/${note_id}`
-      // const response = await fetch(url, {
-      //   method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-      //   headers: {
-      //     'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-      //     'auth-token': auth_tocken        
-      //   },
-      //   body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
-      // });
-      // const deletednote = await response.json()
-      // console.log(deletednote)
+    const editnote = async (note_id, title, description, tag)=>{
+      const url = `${host}/api/notes/updatenote/${note_id}`
+      const response = await fetch(url, {
+        method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
+          'auth-token': auth_tocken        
+        },
+        body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
+      });
+      const editednote = await response.json()
+      console.log(editednote)
+
+      //Logic to edit in client side 
+      // for (let index=0; index < notes.length; index++){
+      //   const element = notes[index]
+      //   if (element._id === note_id){
+      //     notes[index].title = title
+      //     notes[index].description = description
+      //     notes[index].tag = tag
+      //     break
+      //   }
+      // }
+      //Mene upar wala nhi use kiya bcz me directly state ko aise set ya change nhi kr skta hu. 
+      let newNotee = JSON.parse(JSON.stringify(notes)) //isse me iski ek deep copy bana raha hu and usko update krunga
+      for (let index=0; index < newNotee.length; index++){
+        const element = newNotee[index]
+        if (element._id === note_id){
+          newNotee[index].title = title
+          newNotee[index].description = description
+          newNotee[index].tag = tag
+          break
+        }
+      }
+      setNotes(newNotee)
     }
 
     //Delete a note
@@ -85,7 +93,7 @@ const NoteState = (props)=>{
 
 
     return (
-        <NoteContext.Provider value={{notes, getallnotes, addnote, updatenote, deletenote}}>
+        <NoteContext.Provider value={{notes, getallnotes, addnote, editnote, deletenote}}>
             {props.children}
         </NoteContext.Provider>
     )
