@@ -44,21 +44,21 @@ const Notes = () => {
             <form>
               <div className="mb-3">
                   <label htmlFor="etitle" className="form-label">Title</label>
-                  <input type="text" className="form-control" name="etitle" id="etitle" value={note.etitle} onChange={OnChange}/>
+                  <input type="text" className="form-control" name="etitle" id="etitle" value={note.etitle} onChange={OnChange} minLength={3} required/>
               </div>
               <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">Description</label>
-                  <input type="text" className="form-control" name="edescription" id="edescription" value={note.edescription} onChange={OnChange}/>
+                  <input type="text" className="form-control" name="edescription" id="edescription" value={note.edescription} onChange={OnChange} minLength={5} required/>
               </div>
               <div className="mb-3">
                   <label htmlFor="etag" className="form-label">Tag</label>
-                  <input type="text" className="form-control" name="etag" id="etag" value={note.etag} onChange={OnChange}/>
+                  <input type="text" className="form-control" name="etag" id="etag" value={note.etag} onChange={OnChange} />
               </div>
             </form>
           </div>
           <div className="modal-footer">
             <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button"  className="btn btn-primary" onClick={OnclickSubmit}>Update Note</button>
+            <button type="button"  className="btn btn-primary" onSubmit={OnclickSubmit}>Update Note</button>
           </div>
         </div>
       </div>
@@ -66,6 +66,9 @@ const Notes = () => {
 
     <div className='row my-3 mx-2'>
       <h2>Here are my Notes</h2> 
+      <div className='container'>
+      {notes.length===0 && "No notes to display"}
+      </div>
       {notes.map((note)=>{
           return <NoteItem key={note._id} updatenote={updatenote} note={note}/> //key sab ki alag honi chahiye. to key de raha hu
         })}
