@@ -50,19 +50,19 @@ const NoteState = (props)=>{
     }
     
     // Edit a Note 
-    const updatenote = async (note_id, title, description, tag="Public")=>{
-      note_id = '63dce400ec698dcbf7c55811'
-      const url = `${host}/api/notes/updatenote/${note_id}`
-      const response = await fetch(url, {
-        method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-          'auth-token': auth_tocken        
-        },
-        body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
-      });
-      const deletednote = await response.json()
-      console.log(deletednote)
+    const updatenote = async (note_id)=>{
+      // note_id = '63dce400ec698dcbf7c55811'
+      // const url = `${host}/api/notes/updatenote/${note_id}`
+      // const response = await fetch(url, {
+      //   method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+      //   headers: {
+      //     'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
+      //     'auth-token': auth_tocken        
+      //   },
+      //   body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
+      // });
+      // const deletednote = await response.json()
+      // console.log(deletednote)
     }
 
     //Delete a note
@@ -83,7 +83,7 @@ const NoteState = (props)=>{
       setNotes(newnotes)
     }
 
-    
+
     return (
         <NoteContext.Provider value={{notes, getallnotes, addnote, updatenote, deletenote}}>
             {props.children}

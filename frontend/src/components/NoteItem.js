@@ -10,7 +10,7 @@ const NoteItem = (props) => {
     deletenote(note._id) //jis note ko delete krna hai uski id
   }
   const OnclickEdit = ()=>{
-    updatenote(note._id) //jis note ko update krna hai uski id
+    updatenote(note) //jis note ko update krna hai wo
   }
   return (
     <div className='col-md-3'>
