@@ -65,21 +65,21 @@ router.post('/login', [
       }
       
       const {email, password} = req.body; 
-
-      //check if user exists already 
+      let success=false
+ 
       try {
 
       let user  = await User.findOne({email}) 
       if (!user){
         // return res.status(400).json({error: "Oops! this user does not present."}) // but agar koi hacker daal raha hai to me usko kyo batau ki kya galat hai. user hai ki nhi. 
-        return res.status(400).json({error: "Enter correct credentials!"}) 
+        return res.status(400).json({success, error: "Enter correct credentials!"}) 
       }
 
       //ab me password ko hash se compare krunga 
       const comparePass = bcrypt.compare(password, user.password) //true / false return krta hai. 
 
       if (!comparePass) {
-        return res.status(400).json({error: "Enter correct credentials!"})
+        return res.status(400).json({success, error: "Enter correct credentials!"})
       }
 
       const data = {
@@ -88,8 +88,9 @@ router.post('/login', [
           }
        }
       const authToken = jwt.sign(data, JWT_SECRET);
+      success = true
 
-      res.json({authToken})
+      res.json({success, authToken})
       } 
       catch (error){
         console.error(error.message)

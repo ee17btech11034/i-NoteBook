@@ -52,7 +52,14 @@ const Navbar = () => {
                 <li className="nav-item">
                     <Link className="nav-link" to="/about">About</Link>
                 </li>
-            </ul>
+
+                <form className="d-flex mx-3" role="search">
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button className="btn btn-outline-success mx-2" type="submit">Search</button>
+                    <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
+                    <Link className="btn btn-primary mx-2" to="/signup" role="button">SignUp</Link>
+                </form>
+              </ul>
             </div>
         </div>
       </nav>
