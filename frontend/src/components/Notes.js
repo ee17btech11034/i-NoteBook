@@ -58,7 +58,8 @@ const Notes = () => {
           </div>
           <div className="modal-footer">
             <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button"  className="btn btn-primary" onSubmit={OnclickSubmit}>Update Note</button>
+            {/* <button type="button"  className="btn btn-primary" onSubmit={OnclickSubmit}>Update Note</button> */}
+            <button type="button"  className="btn btn-primary" onClick={OnclickSubmit}>Update Note</button>
           </div>
         </div>
       </div>
