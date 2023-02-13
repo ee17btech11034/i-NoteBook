@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate} from 'react-router-dom'
 
 const Login = () => {
   const [credentials, setCredentials] = useState({email:"", password:""})
+  const navigate = useNavigate() 
   const handleSubmit = async(e)=>{
     e.preventDefault();
     const url = "http://localhost:5000/api/auth/login"
@@ -12,8 +14,15 @@ const Login = () => {
         },
         body: JSON.stringify({email:credentials.email, password:credentials.password}) // body data type must match "Content-Type" header
     });
-    const json = response.json()
-    console.log(json)
+    const json = await response.json()
+    if (json.success){ //agar password and email sahi hai to 
+      //authtoken ko local storage me save kro and fir notes par redirect kr do. 
+      localStorage.setItem('token', json.authToken)
+      navigate('/')
+    }
+    else{
+      alert("Enter correct credentials")
+    }
   }
 
   const Onchange = (e)=>{

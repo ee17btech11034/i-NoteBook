@@ -76,7 +76,7 @@ router.post('/login', [
       }
 
       //ab me password ko hash se compare krunga 
-      const comparePass = bcrypt.compare(password, user.password) //true / false return krta hai. 
+      const comparePass = await bcrypt.compare(password, user.password) //true / false return krta hai.      
 
       if (!comparePass) {
         return res.status(400).json({success, error: "Enter correct credentials!"})
