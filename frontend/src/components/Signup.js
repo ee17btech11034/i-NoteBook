@@ -4,13 +4,13 @@ import { useNavigate} from 'react-router-dom'
 
 const Signup = () => {
     const [credentials, setCredentials] = useState({username: "", newemail:"", newpassword:"", cnewpassword:""})
-    const [username, newemail, newpassword, cnewpassword ] = credentials; //me destructuring bhi use kr skta hu.
+    // const {username, newemail, newpassword, cnewpassword} = credentials; //aise krke destructuring ka use bhi kr skta hu 
     const navigate = useNavigate() 
 
     const handleSubmit = async(e)=>{
       e.preventDefault();
       const url = "http://localhost:5000/api/auth/createuser" 
-      if (newpassword !== cnewpassword){
+      if (credentials.newpassword !== credentials.cnewpassword){
         alert("Oops! passwaord and confirm password must be same.")
         return 
       }
@@ -19,9 +19,9 @@ const Signup = () => {
           headers: {
             'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({username, newemail, newpassword}) // body data type must match "Content-Type" header
+          body: JSON.stringify({name: credentials.username, email: credentials.newemail, password: credentials.newpassword}) // body data type must match "Content-Type" header
       });
-      const json = response.json()
+      const json = await response.json()
       if (json.success){ //agar user already nhi hai present to
         //authtoken ko local storage me save kro and fir notes par redirect kr do. 
         localStorage.setItem('token', json.authToken)
@@ -48,7 +48,7 @@ const Signup = () => {
           </div>
           <div className="mb-3">
               <label htmlFor="newpassword" className="form-label">Password</label>
-              <input type="password" className="form-control" name="newpassword" values={credentials.newpassword} id="newpassword" onChange={Onchange}/>
+              <input type="password" className="form-control" name="newpassword" values={credentials.newpassword} id="newpassword" onChange={Onchange} minLength={6} required/>
           </div>
           <div className="mb-3">
               <label htmlFor="cnewpassword" className="form-label">Confirm Password</label>
