@@ -7,6 +7,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm run both`
+
+Runs both the app and beckend on your local machine.
+
 ### `npm start`
 
 Runs the app in the development mode.\
