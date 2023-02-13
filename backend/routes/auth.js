@@ -17,14 +17,15 @@ router.post('/createuser', [
     ] , async (req, res)=>{
         //if there are errors, return bad requests and errors.
         const errors = validationResult(req);
+        let success = false
         if (!errors.isEmpty()) {
-          return res.status(400).json({ errors: errors.array() });
+          return res.status(400).json({success, errors: errors.array() });
         }
         
         //check if user exists already 
         let user  = await User.findOne({email: req.body.email}) 
         if (user){
-          return res.status(400).json({error: "Oops! this email is already present."})
+          return res.status(400).json({success, error: "Oops! this email is already present."})
         }
 
         try {
@@ -44,8 +45,9 @@ router.post('/createuser', [
             }
          }
          const authToken = jwt.sign(data, JWT_SECRET);
+         success = true
 
-         res.json({authToken})
+         res.json({success, authToken})
         } 
         catch (error){
           console.error(error.message)
