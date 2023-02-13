@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
+import { useNavigate} from 'react-router-dom'
 import NoteContext from '../contexts/notes/NoteContext'
 import AddNote from './AddNote'
 import NoteItem from './NoteItem'
@@ -9,9 +10,15 @@ const Notes = () => {
   const ref = useRef(null);
   const refClose = useRef(null);
   const [note, setNote] = useState({note_id:"", etitle:"", edescription:"", etag:""});
+  const navigate = useNavigate() 
 
   useEffect(()=>{
-    getallnotes()
+    if (localStorage.getItem('token')) { //agar token null nhi hai to hi notes ko show kro.
+      getallnotes()
+    }
+    else{
+      navigate('/login')
+    }
     // eslint-disable-next-line
   }, [])
 

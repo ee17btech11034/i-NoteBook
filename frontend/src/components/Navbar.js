@@ -1,12 +1,18 @@
 import React, {useEffect} from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
     let location = useLocation();
+    const navigate = useNavigate() 
     useEffect(()=>{
         console.log(location) //navbar me jis par bhi click krunga usko track krke location batayega
         console.log(location.pathname) //ye uska pathname batayega like /, /about, etc..
     }, [location])
+  const logoutclick = ()=>{
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -53,12 +59,13 @@ const Navbar = () => {
                     <Link className="nav-link" to="/about">About</Link>
                 </li>
 
-                <form className="d-flex mx-3" role="search">
+                {!localStorage.getItem('token') ? <form className="d-flex mx-3" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button className="btn btn-outline-success mx-2" type="submit">Search</button>
                     <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
                     <Link className="btn btn-primary mx-2" to="/signup" role="button">SignUp</Link>
-                </form>
+                </form> :
+                <button className="btn btn-primary mx-4" onClick={logoutclick}>Log out</button>}
               </ul>
             </div>
         </div>

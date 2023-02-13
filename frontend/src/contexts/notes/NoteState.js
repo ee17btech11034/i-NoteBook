@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 const NoteState = (props)=>{
     const host = 'http://localhost:5000' //db ke liye. beckend ki api
-    const auth_tocken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNkYmQ2YmYyY2Y5OWZkNThjOGNjYzk1In0sImlhdCI6MTY3NTM5OTMyMX0.qJvZ-L4Sts41w0d2A0BK7J2NkvwmGWrwwdW11eYMmo0'
     const [notes, setNotes] = useState([])
 
     //get all notes 
@@ -13,7 +12,7 @@ const NoteState = (props)=>{
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-          'auth-token': auth_tocken
+          'auth-token': localStorage.getItem('token')
         },
       });
       const initialNotes = await response.json()
@@ -27,7 +26,7 @@ const NoteState = (props)=>{
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-          'auth-token': auth_tocken        
+          'auth-token': localStorage.getItem('token')        
         },
         body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
       });
@@ -42,7 +41,7 @@ const NoteState = (props)=>{
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-          'auth-token': auth_tocken        
+          'auth-token': localStorage.getItem('token')        
         },
         body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
       });
@@ -81,7 +80,7 @@ const NoteState = (props)=>{
         method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
         headers: {
           'Content-Type': 'application/json', // 'Content-Type': 'application/x-www-form-urlencoded',
-          'auth-token': auth_tocken        
+          'auth-token': localStorage.getItem('token')        
         }
       });
       const deletednote = await response.json()

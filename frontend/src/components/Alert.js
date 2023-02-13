@@ -5,7 +5,7 @@ export default function Alert(props) {
     <div style={{height:'15px'}}>
       {
         props.mesg && <div style={{backgroundColor: 'cyan'}}>
-          {props.mesg.msg} {/* yaha props.msg nhi likha bca props me mesg naam ka object aa raha hai. mesg obj ka element hai msg */}
+          {props.msg} {/* yaha props.msg nhi likha bca props me mesg naam ka object aa raha hai. mesg obj ka element hai msg */}
         </div>
       }
     </div>

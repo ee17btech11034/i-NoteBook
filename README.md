@@ -1,4 +1,5 @@
 # Getting Started with Create React App
+Build an Personal notes react app where you can add your notes or to-do list with your choice tag to cloud , can show and share notes to public/friends
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

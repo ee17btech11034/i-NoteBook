@@ -1,11 +1,15 @@
 import React from 'react'
-import AlertContext from 
+import AlertContext from './AlertContext'
 
 const AlertState = () => {
+
+  const singup = ()=>{
+    
+  }
   return (
-        <NoteContext.Provider value={{notes, getallnotes, addnote, editnote, deletenote}}>
+        <AlertContext.Provider value={{}}>
             {props.children}
-        </NoteContext.Provider>
+        </AlertContext.Provider>
     )
 }
 
